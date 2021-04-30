@@ -1,0 +1,22 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "tetris",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jessicamelise/tetris-js.git"
+  },
+  "keywords": [
+    "tetris"
+  ],
+  "author": "Jessica Melise e Allison Ferreira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jessicamelise/tetris-js/issues"
+  },
+  "homepage": "https://github.com/jessicamelise/tetris-js#readme"
+}
