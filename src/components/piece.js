@@ -11,10 +11,14 @@ export class Piece {
 
     /**
      * 
+     * @param {number} x 
+     * @param {number} y 
      * @param {Block[]} blocks 
      */
-    constructor(blocks) {
-        this._blocks = blocks
+    constructor(blocks, x = 0, y = 0) {
+        this._x = x;
+        this._y = y;
+        this._blocks = blocks;
         this._x1 = 0;
         this._x2 = 0;
         this._y1 = 0;
@@ -22,6 +26,8 @@ export class Piece {
         this._calcPosition();
     }
 
+    get x() { return this._x; }
+    get y() { return this._y; }
     get x1() { return this._x1; }
     get x2() { return this._x2; }
     get y1() { return this._y1; }
@@ -34,28 +40,48 @@ export class Piece {
                 Math.max(acc[1], cur.x),
                 Math.min(acc[2], cur.y),
                 Math.max(acc[3], cur.y),
-            ], 
+            ],
             [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY]
         );
     }
 
-    moveLeft() {
-        this._blocks.forEach(_ => _.moveLeft());
+    /**
+     * 
+     * @param {number} times 
+     */
+    moveLeft(times = 1) {
+        this._x += 1;
+        this._blocks.forEach(_ => _.moveLeft(times));
         this._calcPosition();
     }
 
-    moveRight() {
-        this._blocks.forEach(_ => _.moveRight());
+    /**
+     * 
+     * @param {number} times 
+     */
+    moveRight(times = 1) {
+        this._x -= 1;
+        this._blocks.forEach(_ => _.moveRight(times));
         this._calcPosition();
     }
 
-    moveDown() {
-        this._blocks.forEach(_ => _.moveDown());
+    /**
+     * 
+     * @param {number} times 
+     */
+    moveDown(times = 1) {
+        this._y += 1;
+        this._blocks.forEach(_ => _.moveDown(times));
         this._calcPosition();
     }
 
-    moveUp() {
-        this._blocks.forEach(_ => _.moveUp());
+    /**
+     * 
+     * @param {number} times 
+     */
+    moveUp(times = 1) {
+        this._y -= 1;
+        this._blocks.forEach(_ => _.moveUp(times));
         this._calcPosition();
     }
 
@@ -63,85 +89,122 @@ export class Piece {
      * 
      * @param {boolean} antiClock 
      */
-     rotate(antiClock = false) {
+    rotate(antiClock = false) {
+        this._blocks.forEach(_ => { _.x -= this.x; _.y -= this.y; });
         this._blocks.forEach(_ => _.rotate(antiClock));
+        this._blocks.forEach(_ => { _.x += this.x; _.y += this.y; });
         this._calcPosition();
     }
 }
 
 export class PieceL extends Piece {
-    constructor() {
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     */
+    constructor(x = 0, y = 0) {
         super([
             new Block(-1, 0),
             new Block(0, 0),
             new Block(-1, 1),
             new Block(1, 0)
-        ])
+        ], x, y)
     }
 }
 
 export class PieceJ extends Piece {
-    constructor() {
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     */
+    constructor(x = 0, y = 0) {
         super([
             new Block(-1, -1),
             new Block(-1, 0),
             new Block(0, 0),
             new Block(1, 0)
-        ])
+        ], x, y)
     }
 }
 
 export class PieceS extends Piece {
-    constructor() {
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     */
+    constructor(x = 0, y = 0) {
         super([
             new Block(-1, 0),
             new Block(0, -1),
             new Block(0, 0),
             new Block(1, -1)
-        ])
+        ], x, y)
     }
 }
 
 export class PieceZ extends Piece {
-    constructor() {
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     */
+    constructor(x = 0, y = 0) {
         super([
             new Block(-1, -1),
             new Block(0, -1),
             new Block(0, 0),
             new Block(1, 0)
-        ])
+        ], x, y)
     }
 }
 
 export class PieceT extends Piece {
-    constructor() {
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     */
+    constructor(x = 0, y = 0) {
         super([
             new Block(-1, 0),
             new Block(0, -1),
             new Block(0, 0),
             new Block(1, 0)
-        ])
+        ], x, y)
     }
 }
 
 export class PieceO extends Piece {
-    constructor() {
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     */
+    constructor(x = 0, y = 0) {
         super([
             new Block(-1, 0),
             new Block(0, 0),
             new Block(1, -1),
             new Block(1, 1)
-        ])
+        ], x, y)
     }
 }
 
 export class PieceI extends Piece {
-    constructor() {
+    /**
+     * 
+     * @param {number} x 
+     * @param {number} y 
+     */
+    constructor(x = 0, y = 0) {
         super([
             new Block(-1, 0),
             new Block(0, 0),
             new Block(1, 0),
             new Block(2, 0)
-        ])
+        ], x, y)
     }
 }
