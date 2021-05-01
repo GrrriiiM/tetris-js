@@ -11,6 +11,9 @@ export default class Block {
         this._y = y;
     }
 
+    get x() { return this._x };
+    get y() { return this._y };
+
     moveLeft() {
         this._x += 1;
     }
@@ -32,9 +35,9 @@ export default class Block {
      * @param {boolean} antiClock 
      */
     rotate(antiClock = false) {
-        if (!antiClock)
-            this._x, this._y = this._y * -1, this._x;
-        else
-            this._x, this._y = this._y, this._x * -1;
+        let x = this._x;
+        let y = this._y;
+        if (!antiClock) [this._x, this._y] = [y * -1, x];
+        else [this._x, this._y] = [y, x * -1];
     }
 }

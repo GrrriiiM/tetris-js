@@ -15,22 +15,48 @@ export class Piece {
      */
     constructor(blocks) {
         this._blocks = blocks
+        this._x1 = 0;
+        this._x2 = 0;
+        this._y1 = 0;
+        this._y2 = 0;
+        this._calcPosition();
+    }
+
+    get x1() { return this._x1; }
+    get x2() { return this._x2; }
+    get y1() { return this._y1; }
+    get y2() { return this._y2; }
+
+    _calcPosition() {
+        [this._x1, this._x2, this._y1, this._y2] = this._blocks.reduce(
+            (acc, cur) => [
+                Math.min(acc[0], cur.x),
+                Math.max(acc[1], cur.x),
+                Math.min(acc[2], cur.y),
+                Math.max(acc[3], cur.y),
+            ], 
+            [Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY]
+        );
     }
 
     moveLeft() {
         this._blocks.forEach(_ => _.moveLeft());
+        this._calcPosition();
     }
 
     moveRight() {
         this._blocks.forEach(_ => _.moveRight());
+        this._calcPosition();
     }
 
     moveDown() {
-        this._blocks.forEach(_ => _.moveRight());
+        this._blocks.forEach(_ => _.moveDown());
+        this._calcPosition();
     }
 
     moveUp() {
-        this._blocks.forEach(_ => _.moveRight());
+        this._blocks.forEach(_ => _.moveUp());
+        this._calcPosition();
     }
 
     /**
@@ -39,6 +65,7 @@ export class Piece {
      */
      rotate(antiClock = false) {
         this._blocks.forEach(_ => _.rotate(antiClock));
+        this._calcPosition();
     }
 }
 
