@@ -22,6 +22,6 @@ jobs:
     - name: executando teste
       run: npm test --verbose --coverage
     - name: Submetendo resultado teste
-        uses: codecov/codecov-action@v1
-        with:
-          fail_ci_if_error: true
+      uses: codecov/codecov-action@v1
+      with:
+        fail_ci_if_error: true
