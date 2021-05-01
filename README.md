@@ -1,7 +1,7 @@
 # tetris-js
-[![codecov](https://codecov.io/gh/GrrriiiM/tetris-js/branch/master/graph/badge.svg?token=TREHO7M461)](https://codecov.io/gh/GrrriiiM/tetris-js)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/grrriiim/tetris-js/build)
+[![codecov](https://codecov.io/gh/GrrriiiM/tetris-js/branch/teste_codecov/graph/badge.svg?token=N03MMpaEvr)](https://codecov.io/gh/GrrriiiM/tetris-js)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![CI](https://github.com/GrrriiiM/tetris-js/workflows/CI/badge.svg)
 ## Índice
 
 * [1. Sobre o Projeto](#1-Sobre-o-projeto)
