@@ -4,7 +4,7 @@
   "description": "tetris",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --verbose --coverage"
   },
   "repository": {
     "type": "git",

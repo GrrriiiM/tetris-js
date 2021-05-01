@@ -13,21 +13,39 @@ export default class Block {
 
     get x() { return this._x };
     get y() { return this._y };
+    set x(value) { this._x = value; }
+    set y(value) { this._y = value; }
 
-    moveLeft() {
-        this._x += 1;
+    /**
+     * 
+     * @param {number} times 
+     */
+    moveLeft(times = 1) {
+        this._x += times;
     }
 
-    moveRight() {
-        this._x -= 1;
+    /**
+     * 
+     * @param {number} times 
+     */
+    moveRight(times = 1) {
+        this._x -= times;
     }
 
-    moveDown() {
-        this._y += 1;
+    /**
+     * 
+     * @param {number} times 
+     */
+    moveDown(times = 1) {
+        this._y += times;
     }
 
-    moveUp() {
-        this._y -= 1;
+    /**
+     * 
+     * @param {number} times 
+     */
+    moveUp(times = 1) {
+        this._y -= times;
     }
 
     /**
@@ -38,6 +56,6 @@ export default class Block {
         let x = this._x;
         let y = this._y;
         if (!antiClock) [this._x, this._y] = [y * -1, x];
-        else [this._x, this._y] = [y, x * -1];
+        else[this._x, this._y] = [y, x * -1];
     }
 }
