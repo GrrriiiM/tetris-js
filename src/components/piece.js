@@ -16,14 +16,14 @@ export class Piece {
      * @param {Block[]} blocks 
      */
     constructor(blocks, x = 0, y = 0) {
-        this._x = x;
-        this._y = y;
+        this._x = 0;
+        this._y = 0;
         this._blocks = blocks;
         this._x1 = 0;
         this._x2 = 0;
         this._y1 = 0;
         this._y2 = 0;
-        this._calcPosition();
+        this.moveRight(x).moveDown(y);
     }
 
     get x() { return this._x; }
@@ -32,6 +32,7 @@ export class Piece {
     get x2() { return this._x2; }
     get y1() { return this._y1; }
     get y2() { return this._y2; }
+    get blocks() { return this._blocks; }
 
     _calcPosition() {
         [this._x1, this._x2, this._y1, this._y2] = this._blocks.reduce(
@@ -49,20 +50,22 @@ export class Piece {
      * 
      * @param {number} times 
      */
-    moveLeft(times = 1) {
-        this._x += 1;
-        this._blocks.forEach(_ => _.moveLeft(times));
+    moveRight(times = 1) {
+        this._x += times;
+        this._blocks.forEach(_ => _.moveRight(times));
         this._calcPosition();
+        return this;
     }
 
     /**
      * 
      * @param {number} times 
      */
-    moveRight(times = 1) {
-        this._x -= 1;
-        this._blocks.forEach(_ => _.moveRight(times));
+    moveLeft(times = 1) {
+        this._x -= times;
+        this._blocks.forEach(_ => _.moveLeft(times));
         this._calcPosition();
+        return this;
     }
 
     /**
@@ -70,9 +73,10 @@ export class Piece {
      * @param {number} times 
      */
     moveDown(times = 1) {
-        this._y += 1;
+        this._y += times;
         this._blocks.forEach(_ => _.moveDown(times));
         this._calcPosition();
+        return this;
     }
 
     /**
@@ -80,9 +84,10 @@ export class Piece {
      * @param {number} times 
      */
     moveUp(times = 1) {
-        this._y -= 1;
+        this._y -= times;
         this._blocks.forEach(_ => _.moveUp(times));
         this._calcPosition();
+        return this;
     }
 
     /**
@@ -90,10 +95,15 @@ export class Piece {
      * @param {boolean} antiClock 
      */
     rotate(antiClock = false) {
-        this._blocks.forEach(_ => { _.x -= this.x; _.y -= this.y; });
-        this._blocks.forEach(_ => _.rotate(antiClock));
-        this._blocks.forEach(_ => { _.x += this.x; _.y += this.y; });
+        this._blocks.forEach(_ => 
+            _.moveLeft(this.x)
+            .moveUp(this.y)
+            .rotate(antiClock)
+            .moveRight(this.x)
+            .moveDown(this.y)
+        );
         this._calcPosition();
+        return this;
     }
 }
 
