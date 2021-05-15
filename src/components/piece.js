@@ -1,12 +1,13 @@
 //@ts-check
 
-import Block from "./block";
+import Block from "./block.js";
+import { Colors } from "./colors.js";
 
 export class Piece {
-    static Random() {
+    static Random(x=0, y=0) {
         let random = Math.floor(Math.random() * 7);
         let p = [PieceI, PieceJ, PieceL, PieceO, PieceS, PieceT, PieceZ][random];
-        return new p();
+        return new p(x,y);
     }
 
     /**
@@ -115,10 +116,10 @@ export class PieceL extends Piece {
      */
     constructor(x = 0, y = 0) {
         super([
-            new Block(-1, 0),
-            new Block(0, 0),
-            new Block(-1, 1),
-            new Block(1, 0)
+            new Block(-1, 0, Colors.blue),
+            new Block(0, 0, Colors.blue),
+            new Block(1, -1, Colors.blue),
+            new Block(1, 0, Colors.blue)
         ], x, y)
     }
 }
@@ -131,10 +132,10 @@ export class PieceJ extends Piece {
      */
     constructor(x = 0, y = 0) {
         super([
-            new Block(-1, -1),
-            new Block(-1, 0),
-            new Block(0, 0),
-            new Block(1, 0)
+            new Block(-1, -1, Colors.green),
+            new Block(-1, 0, Colors.green),
+            new Block(0, 0, Colors.green),
+            new Block(1, 0, Colors.green)
         ], x, y)
     }
 }
@@ -147,10 +148,10 @@ export class PieceS extends Piece {
      */
     constructor(x = 0, y = 0) {
         super([
-            new Block(-1, 0),
-            new Block(0, -1),
-            new Block(0, 0),
-            new Block(1, -1)
+            new Block(-1, 0, Colors.orange),
+            new Block(0, -1, Colors.orange),
+            new Block(0, 0, Colors.orange),
+            new Block(1, -1, Colors.orange)
         ], x, y)
     }
 }
@@ -163,10 +164,10 @@ export class PieceZ extends Piece {
      */
     constructor(x = 0, y = 0) {
         super([
-            new Block(-1, -1),
-            new Block(0, -1),
-            new Block(0, 0),
-            new Block(1, 0)
+            new Block(-1, -1, Colors.purple),
+            new Block(0, -1, Colors.purple),
+            new Block(0, 0, Colors.purple),
+            new Block(1, 0, Colors.purple)
         ], x, y)
     }
 }
@@ -179,10 +180,10 @@ export class PieceT extends Piece {
      */
     constructor(x = 0, y = 0) {
         super([
-            new Block(-1, 0),
-            new Block(0, -1),
-            new Block(0, 0),
-            new Block(1, 0)
+            new Block(-1, 0, Colors.red),
+            new Block(0, -1, Colors.red),
+            new Block(0, 0, Colors.red),
+            new Block(1, 0, Colors.red)
         ], x, y)
     }
 }
@@ -195,10 +196,10 @@ export class PieceO extends Piece {
      */
     constructor(x = 0, y = 0) {
         super([
-            new Block(-1, 0),
-            new Block(0, 0),
-            new Block(1, -1),
-            new Block(1, 1)
+            new Block(0, -1, Colors.yellow),
+            new Block(0, 0, Colors.yellow),
+            new Block(1, -1, Colors.yellow),
+            new Block(1, 0, Colors.yellow)
         ], x, y)
     }
 }
@@ -211,10 +212,10 @@ export class PieceI extends Piece {
      */
     constructor(x = 0, y = 0) {
         super([
-            new Block(-1, 0),
-            new Block(0, 0),
-            new Block(1, 0),
-            new Block(2, 0)
+            new Block(-1, 0, Colors.navy),
+            new Block(0, 0, Colors.navy),
+            new Block(1, 0, Colors.navy),
+            new Block(2, 0, Colors.navy)
         ], x, y)
     }
 }

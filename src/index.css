@@ -1,0 +1,269 @@
+
+:root {
+  --body: #c4c4c4;
+  --board-color: #000000;
+  --board-border-color: #979797;
+  --blue: #0000ff;
+  --green: #008000;
+  --red: #ff0000;
+  --yellow: #ffff00;
+  --orange: #ffa500;
+  --purple: #800080;
+  --white: #ffffff;
+  --navy: #000080;
+  --light: #fdfdfd79;
+  --dark: #00000042;
+  --empty: #ffffff00;
+  --base-size: 24px;
+  --block-border: 0.3em;
+  --block-size: 1em;
+  --board-border: 0.5em;
+  --board-width: 10em;
+  --board-height: 24em;
+  --transform-z: 0.5em;
+  --perpective: 30em;
+}
+
+
+
+
+
+
+body {
+  width: 100vw !important;
+  font-size: var(--base-size);
+  margin: 0px;
+
+}
+
+.game {
+  padding: var(--block-size);
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "time time"
+    "score score"
+    "board next"
+    "command command";
+    background:
+    linear-gradient(45deg, var(--dark) 50%, var(--empty) 50%) 0% 0% / var(--block-size) var(--block-size),
+    linear-gradient(-45deg, var(--light) 50%, var(--empty) 50%) 0% 0% / var(--block-size) var(--block-size);
+  background-color: var(--body);
+  
+}
+
+.time {
+  grid-area: time;
+  height: var(--block-size);
+  padding: 0px;
+}
+
+.score {
+  grid-area: score;
+  height: var(--block-size);
+  padding: 0px;
+}
+
+.board {
+  width: var(--board-width);
+  height: var(--board-height);
+  perspective: var(--perpective);
+  background-color: var(--board-color);
+}
+
+
+
+.board-3d {
+  width: var(--board-width);
+  height: var(--board-height);
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(calc(var(--transform-z) * -1));
+}
+
+.board-3d-side {
+  position: absolute;
+  width: var(--board-width);
+  height: var(--board-height);
+  /* line-height: 200px; */
+  /* font-size: 40px; */
+  /* font-weight: bold; */
+  /* color: white; */
+  /* text-align: center; */
+  
+  
+}
+
+.board-top {
+  height: calc(var(--block-size) * 2);
+  transform: rotateX(90deg) translateZ(calc(var(--transform-z) * 2));
+  background:
+    linear-gradient(to top, var(--light), var(--empty) 100%) 0% 0% / 100% 100%;
+  background-color: var(--board-color);
+}
+
+.board-bottom {
+  height: calc(var(--block-size) * 2);
+  bottom: 0px;
+  transform: rotateX(-90deg) translateZ(calc(var(--transform-z) * 2));
+  background:
+    linear-gradient(var(--light), var(--empty)) 0% 0% / 100% 100%;
+  background-color: var(--board-color);
+}
+
+.board-left {
+  width: calc(var(--block-size) * 2);
+  left: 0px;
+  transform: rotateY(-90deg) translateZ(calc(var(--transform-z) * 2));
+  background:
+    linear-gradient(to left, var(--light), var(--empty)) 0% 0% / 100% 100%;
+  background-color: var(--board-color);
+}
+
+
+.board-right {
+  width: calc(var(--block-size) * 2);
+  right: 0px;
+  transform: rotateY(90deg) translateZ(calc(var(--transform-z) * 2));
+  background:
+    linear-gradient(to right, var(--light), var(--empty)) 0% 0% / 100% 100%;
+  background-color: var(--board-color);
+}
+
+
+
+
+
+.next {
+  grid-area: next;
+  border: var(--board-border) solid var(--board-color); 
+  width: calc(var(--block-size) * 5);
+  height: calc(var(--block-size) * 20);
+  justify-self: right;
+  background:
+    linear-gradient(45deg, var(--dark) 50%, var(--empty) 50%) 0% 0% / calc(var(--block-size) * 1) calc(var(--block-size) * 1),
+    linear-gradient(-45deg, var(--light) 50%, var(--empty) 50%) 0% 0% / calc(var(--block-size) * 1) calc(var(--block-size) * 1);
+  background-color: var(--board-color);
+}
+
+.command {
+  grid-area: command;
+}
+
+.block {
+  position: absolute;
+  transition: 0.2s;
+}
+
+
+.block-3d-front {
+  transform: rotateY(0deg) translateZ(var(--transform-z));
+  z-index: 10;
+}
+
+.block-3d-top {
+  transform: rotateX(90deg) translateZ(var(--transform-z));
+  background:
+    linear-gradient(to top, var(--empty), var(--dark)) 0% 0% / 100% 100%;
+}
+
+.block-3d-bottom {
+  transform: rotateX(-90deg) translateZ(var(--transform-z));
+  background:
+    linear-gradient(to bottom, var(--empty), var(--dark)) 0% 0% / 100% 100%;
+}
+
+.block-3d-left {
+  transform: rotateY(-90deg) translateZ(var(--transform-z));
+  background:
+    linear-gradient(to left, var(--empty), var(--dark)) 0% 0% / 100% 100%;
+}
+
+.block-3d-right {
+  transform: rotateY(90deg) translateZ(var(--transform-z));
+  background:
+    linear-gradient(to right, var(--empty), var(--dark)) 0% 0% / 100% 100%;
+}
+
+.block-3d {
+  position: absolute;
+  width: var(--block-size);
+  height: var(--block-size);
+  background-repeat: no-repeat !important;
+  background:
+    linear-gradient(45deg, var(--dark) 50%, var(--empty) 50%) 0% 0% / var(--block-border) var(--block-border),
+    linear-gradient(135deg, var(--dark) 50%, var(--empty) 50%) 0% 100% / var(--block-border) var(--block-border),
+    linear-gradient(var(--dark), var(--dark)) 0% 50% / var(--block-border) calc(var(--block-size) - var(--block-border) - var(--block-border)),
+
+    linear-gradient(45deg, var(--dark) 50%, var(--empty) 50%) 0% 0% / var(--block-border) var(--block-border),
+    linear-gradient(135deg, var(--dark) 50%, var(--empty) 50%) 0% 100% / var(--block-border) var(--block-border),
+    linear-gradient(var(--dark), var(--dark)) 0% 50% / var(--block-border) calc(var(--block-size) - var(--block-border) - var(--block-border)),
+
+    linear-gradient(315deg, var(--dark) 50%, var(--empty) 50%) 0% 100% / var(--block-border) var(--block-border),
+    linear-gradient(45deg, var(--dark) 50%, var(--empty) 50%) 100% 100% / var(--block-border) var(--block-border),
+    linear-gradient(var(--dark), var(--dark)) 50% 100% /  calc(var(--block-size) - var(--block-border) - var(--block-border)) var(--block-border),
+
+    linear-gradient(225deg, var(--light) 50%, var(--empty) 50%) 0% 0% / var(--block-border) var(--block-border),
+    linear-gradient(135deg, var(--light) 50%, var(--empty) 50%) 100% 0% / var(--block-border) var(--block-border),
+    linear-gradient(var(--light), var(--light)) 50% 0% /  calc(var(--block-size) - var(--block-border) - var(--block-border)) var(--block-border),
+
+    linear-gradient(315deg, var(--light) 50%, var(--empty) 50%) 100% 0% / var(--block-border) var(--block-border),
+    linear-gradient(225deg, var(--light) 50%, var(--empty) 50%) 100% 100% / var(--block-border) var(--block-border),
+    linear-gradient(var(--light), var(--light)) 100% 50% / var(--block-border) calc(var(--block-size) - var(--block-border) - var(--block-border)),
+
+    linear-gradient(315deg, var(--light) 50%, var(--empty) 50%) 100% 0% / var(--block-border) var(--block-border),
+    linear-gradient(225deg, var(--light) 50%, var(--empty) 50%) 100% 100% / var(--block-border) var(--block-border),
+    linear-gradient(var(--light), var(--light)) 100% 50% / var(--block-border) calc(var(--block-size) - var(--block-border) - var(--block-border));
+  background-color: inherit;
+}
+
+
+.blue {
+  background-color: var(--blue);
+}
+
+.green {
+  background-color: var(--green);
+}
+
+.red {
+  background-color: var(--red);
+}
+
+.yellow {
+  background-color: var(--yellow);
+}
+
+.orange {
+  background-color: var(--orange);
+}
+
+.purple {
+  background-color: var(--purple);
+}
+
+.white {
+  background-color: var(--white);
+}
+
+.hide {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.navy {
+  background-color: var(--navy);
+}
+
+@media screen and (max-width: 380px) {
+  :root {
+    --base-size: 20px;
+  }  
+}
+
+@media screen and (max-width: 320px) {
+  :root {
+    --base-size: 18px;
+  }  
+}
